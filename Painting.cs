@@ -39,6 +39,7 @@ class Painting
 		_strokeList.RemoveAt(_strokeList.Count-1);
 	}
 
+
 	public void Redo()
 	{
 		// Nothing to redo? No redo!
@@ -48,6 +49,7 @@ class Painting
 		// Pop the most recent Undo off the stack, and add it to the painting.
 		_strokeList.Add(_undoStack.Pop());
 	}
+
 
 	void UpdateInput(Handed handed, Color color, float thickness)
 	{
