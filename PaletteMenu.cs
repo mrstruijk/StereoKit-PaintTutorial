@@ -127,7 +127,7 @@ internal class PaletteMenu
         // Display a preview of the brush stroke's size. We'll reserve a box
         // that can hold the maximum size for the brush stroke, and preview
         // the stroke with an unlit cube scaled to the brush's size.
-        Bounds linePreview = UI.LayoutReserve(V.XY(0, 0.05f));
+        var linePreview = UI.LayoutReserve(V.XY(0, 0.05f));
         linePreview.dimensions.y = _size;
         linePreview.dimensions.z = U.cm;
         Mesh.Cube.Draw(Material.Unlit, Matrix.TS(linePreview.center, linePreview.dimensions), PaintColor);
@@ -140,7 +140,7 @@ internal class PaletteMenu
     private void SwatchColor(string id, float hue, float saturation, float value)
     {
         // Reserve a spot for this swatch!
-        Bounds bounds = UI.LayoutReserve(_swatchModel.Bounds.dimensions.XY);
+        var bounds = UI.LayoutReserve(_swatchModel.Bounds.dimensions.XY);
         bounds.dimensions.z = U.cm * 4;
 
         // Draw the swatch model using the color it represents! We'll also
@@ -150,7 +150,7 @@ internal class PaletteMenu
 
         // If the users interacts with the volume the swatch model is in,
         // then we'll set the active color right here, and play some sfx!
-        BtnState state = UI.VolumeAt(id, bounds, UIConfirm.Push);
+        var state = UI.VolumeAt(id, bounds, UIConfirm.Push);
 
         if (state.IsJustActive())
         {
@@ -168,7 +168,7 @@ internal class PaletteMenu
     private bool SwatchSize(string id, float size)
     {
         // Reserve a spot for this swatch!
-        Bounds bounds = UI.LayoutReserve(Vec2.One * 4 * U.cm);
+        var bounds = UI.LayoutReserve(Vec2.One * 4 * U.cm);
         bounds.dimensions.z = U.cm * 4;
 
         // Draw a swatch model using the size it represents! We'll also
@@ -178,7 +178,7 @@ internal class PaletteMenu
 
         // If the users interacts with the volume the swatch model is in,
         // then we'll notify the caller by returning true.
-        BtnState state = UI.VolumeAt(id, bounds, UIConfirm.Push);
+        var state = UI.VolumeAt(id, bounds, UIConfirm.Push);
 
         if (state.IsJustActive())
         {

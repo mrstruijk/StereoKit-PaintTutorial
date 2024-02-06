@@ -130,7 +130,7 @@ internal class Painting
     {
         // Calculate the current distance from the last point, as well as the
         // speed at which the hand is traveling.
-        var prevLinePoint = _activeStroke[_activeStroke.Count - 2].pt;
+        var prevLinePoint = _activeStroke[^2].pt;
         var dist = Vec3.Distance(prevLinePoint, at);
         var speed = Vec3.Distance(at, _prevFingertip) / Time.Stepf;
 
@@ -151,7 +151,7 @@ internal class Painting
         }
         else
         {
-            _activeStroke[_activeStroke.Count - 1] = here;
+            _activeStroke[^1] = here;
         }
     }
 
@@ -188,7 +188,7 @@ internal class Painting
                              .Split('\n')
                              .Select(textLine => textLine
                                                  .Split(',')
-                                                 .Select(textPoint => LinePointFromString(textPoint))
+                                                 .Select(LinePointFromString)
                                                  .ToArray())
                              .ToList();
 
@@ -210,7 +210,7 @@ internal class Painting
         // 0 0.1 0 255 0 0 0.02, 0.1 0.1 0 255 0 0 0.02, 0.2 0 0 255 0 0 0.02
         return string.Join('\n', _strokeList
             .Select(line => string.Join(',', line
-                .Select(point => LinePointToString(point)))));
+                .Select(LinePointToString))));
     }
 
 
